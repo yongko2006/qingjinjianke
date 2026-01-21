@@ -1,0 +1,1820 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>青矜建课 | AI智慧课程建设专业服务</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 隐藏所有超链接下划线 */
+a {
+    text-decoration: none !important;
+}
+
+/* 确保悬停时也没有下划线 */
+a:hover, a:focus, a:active {
+    text-decoration: none !important;
+}
+
+/* 特殊情况处理：导航栏链接已使用伪元素作为下划线，需要保持原有样式 */
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 3px;
+    background: linear-gradient(to right, var(--primary-light), var(--secondary-color));
+    bottom: 0;
+    left: 0;
+    border-radius: 2px;
+    transition: width 0.3s;
+}
+
+nav ul li a:hover::after, nav ul li a.active::after {
+    width: 100%;
+}
+
+/* 页脚链接悬停时的动画效果 */
+.footer-column a:hover {
+    color: var(--primary-lighter);
+    padding-left: 5px;
+}
+        :root {
+            --primary-color: #1e40af;
+            --primary-light: #3b82f6;
+            --primary-lighter: #60a5fa;
+            --secondary-color: #10b981;
+            --accent-color: #8b5cf6;
+            --warning-color: #f59e0b;
+            --dark-color: #1f2937;
+            --light-color: #f8fafc;
+            --text-color: #374151;
+            --text-light: #6b7280;
+            --border-color: #e5e7eb;
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.12);
+            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --transition: all 0.3s ease;
+            --border-radius: 12px;
+            --border-radius-lg: 16px;
+            --border-radius-sm: 8px;
+            --header-height: 80px; /* 新增：定义头部高度变量 */
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            font-size: 16px;
+            overflow-x: hidden;
+            scroll-padding-top: var(--header-height); /* 修复：确保滚动时考虑头部高度 */
+        }
+        
+        h1, h2, h3, h4, h5 {
+            color: var(--dark-color);
+            font-weight: 600;
+            line-height: 1.3;
+            letter-spacing: -0.02em;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        .section {
+            padding: 100px 0;
+            position: relative;
+            scroll-margin-top: var(--header-height); /* 关键修复：确保滚动定位时考虑头部高度 */
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 70px;
+            position: relative;
+        }
+        
+        .section-title h2 {
+            font-size: 42px;
+            margin-bottom: 18px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.03em;
+        }
+        
+        .section-title p {
+            font-size: 18px;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        
+        .section-title .title-decoration {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .section-title .title-decoration span {
+            width: 45px;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary-light), var(--secondary-color));
+            border-radius: 3px;
+        }
+        
+        .section-title .title-decoration span:nth-child(2) {
+            width: 90px;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 36px;
+            border-radius: var(--border-radius-sm);
+            font-weight: 600;
+            font-size: 16px;
+            text-decoration: none;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            gap: 10px;
+            letter-spacing: 0.02em;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
+            color: white;
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.25);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-light);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--primary-light);
+            color: white;
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.2);
+        }
+        
+        /* 头部样式优化 */
+        header {
+            background-color: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--shadow-sm);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 18px 0;
+            transition: var(--transition);
+            height: var(--header-height); /* 使用变量定义高度 */
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo span {
+            color: var(--accent-color);
+        }
+        
+        .logo-icon {
+            background: linear-gradient(135deg, var(--primary-light), var(--accent-color));
+            color: white;
+            padding: 12px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 15px rgba(59, 130, 246, 0.2);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 32px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 16px;
+            transition: var(--transition);
+            padding: 8px 4px;
+            position: relative;
+            letter-spacing: 0.01em;
+        }
+        
+        nav ul li a:hover, nav ul li a.active {
+            color: var(--primary-color);
+        }
+        
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary-light), var(--secondary-color));
+            bottom: 0;
+            left: 0;
+            border-radius: 2px;
+            transition: width 0.3s;
+        }
+        
+        nav ul li a:hover::after, nav ul li a.active::after {
+            width: 100%;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: var(--primary-color);
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 6px;
+            background-color: rgba(59, 130, 246, 0.05);
+        }
+        
+        /* 英雄区域优化 - 添加顶部内边距防止被头部遮挡 */
+        .hero {
+            padding-top: 180px;
+            padding-bottom: 120px;
+            background: linear-gradient(135deg, rgba(30, 64, 175, 0.05) 0%, rgba(139, 92, 246, 0.05) 100%);
+            position: relative;
+            overflow: hidden;
+            scroll-margin-top: var(--header-height); /* 确保锚点定位正确 */
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: url('C:\\Users\\yangko\\Desktop\\网站\\老师1.png') no-repeat center/cover;
+            opacity: 1;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 56px;
+            margin-bottom: 28px;
+            line-height: 1.2;
+            letter-spacing: -0.03em;
+        }
+        
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 45px;
+            color: var(--text-light);
+            line-height: 1.8;
+            max-width: 720px;
+        }
+        
+        .hero-btns {
+            display: flex;
+            gap: 22px;
+            margin-top: 45px;
+            flex-wrap: wrap;
+        }
+        
+        /* 统计区域优化 */
+        .stats-section {
+            background-color: white;
+            padding: 70px 0;
+            box-shadow: var(--shadow);
+            margin-top: -40px;
+            position: relative;
+            z-index: 2;
+            border-radius: var(--border-radius-lg);
+            margin: -40px auto 0;
+            width: 92%;
+            max-width: 1100px;
+            border: 1px solid var(--border-color);
+            scroll-margin-top: calc(var(--header-height) + 20px); /* 调整统计区域定位 */
+        }
+        
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 35px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 25px 20px;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            background-color: var(--light-color);
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .stat-number {
+            font-size: 44px;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 12px;
+            display: block;
+            letter-spacing: -0.03em;
+        }
+        
+        .stat-text {
+            color: var(--text-light);
+            font-size: 16px;
+            font-weight: 500;
+        }
+        
+        /* 问题展示区域优化 */
+        .problems-section {
+            background-color: white;
+            padding-top: 140px;
+            scroll-margin-top: var(--header-height); /* 确保锚点定位正确 */
+        }
+        
+        .problems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+            margin-top: 55px;
+        }
+        
+        .problem-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 45px 32px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .problem-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(to right, var(--primary-light), var(--secondary-color));
+        }
+        
+        .problem-card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .problem-icon {
+            font-size: 56px;
+            margin-bottom: 28px;
+            background: linear-gradient(135deg, var(--primary-light), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .problem-card h3 {
+            font-size: 24px;
+            margin-bottom: 18px;
+            letter-spacing: -0.02em;
+        }
+        
+        .problem-card p {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+        
+        /* 名师介绍区域优化 */
+        .teachers-section {
+            background: linear-gradient(135deg, rgba(248, 250, 252, 0.95) 0%, rgba(241, 245, 249, 0.95) 100%);
+            scroll-margin-top: var(--header-height); /* 确保锚点定位正确 */
+        }
+        
+        .teachers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 35px;
+            margin-top: 55px;
+        }
+        
+        .teacher-card {
+            background-color: white;
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+        }
+        
+        .teacher-card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .teacher-img-container {
+            height: 270px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .teacher-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .teacher-card:hover .teacher-img {
+            transform: scale(1.05);
+        }
+        
+        .teacher-tag {
+            position: absolute;
+            top: 22px;
+            right: 22px;
+            background: linear-gradient(135deg, var(--warning-color), #f97316);
+            color: white;
+            padding: 6px 18px;
+            border-radius: 22px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+        }
+        
+        .teacher-info {
+            padding: 28px;
+        }
+        
+        .teacher-name {
+            font-size: 24px;
+            margin-bottom: 6px;
+            color: var(--dark-color);
+            letter-spacing: -0.02em;
+        }
+        
+        .teacher-title {
+            color: var(--primary-color);
+            font-weight: 500;
+            margin-bottom: 12px;
+            font-size: 16px;
+        }
+        
+        .teacher-expertise {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+        
+        .expertise-tag {
+            background-color: var(--light-color);
+            color: var(--text-light);
+            padding: 6px 14px;
+            border-radius: 18px;
+            font-size: 13px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .teacher-desc {
+            color: var(--text-light);
+            font-size: 14.5px;
+            line-height: 1.65;
+        }
+        
+        /* 解决方案标语优化 */
+        .solution-banner {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: white;
+            padding: 90px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            scroll-margin-top: var(--header-height); /* 确保锚点定位正确 */
+        }
+        
+        .solution-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 35px 35px;
+            opacity: 0.3;
+        }
+        
+        .solution-banner h2 {
+            font-size: 42px;
+            margin-bottom: 22px;
+            color: white;
+            position: relative;
+            z-index: 1;
+            letter-spacing: -0.02em;
+        }
+        
+        .solution-banner p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto 45px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+            line-height: 1.8;
+        }
+        
+        /* 建设流程图优化 */
+        .process-section {
+            background-color: var(--light-color);
+            scroll-margin-top: var(--header-height); /* 确保锚点定位正确 */
+        }
+        
+        .process-container {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .process-line {
+            position: absolute;
+            top: 110px;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(to right, var(--primary-light), var(--secondary-color));
+            z-index: 1;
+        }
+        
+        .process-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .process-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 16%;
+            text-align: center;
+        }
+        
+        .step-number {
+            width: 85px;
+            height: 85px;
+            background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            font-weight: 700;
+            margin-bottom: 22px;
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+            border: 6px solid white;
+            transition: var(--transition);
+        }
+        
+        .process-step:hover .step-number {
+            transform: scale(1.12);
+            box-shadow: 0 15px 30px rgba(59, 130, 246, 0.4);
+        }
+        
+        .step-content {
+            background-color: white;
+            padding: 28px 22px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            width: 100%;
+            margin-top: 12px;
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+        }
+        
+        .step-content:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .step-content h3 {
+            font-size: 19px;
+            margin-bottom: 12px;
+            color: var(--primary-color);
+            letter-spacing: -0.02em;
+        }
+        
+        .step-content p {
+            font-size: 14.5px;
+            color: var(--text-light);
+            line-height: 1.65;
+        }
+        
+        /* AI能力展示优化 */
+        .ai-capabilities {
+            background-color: white;
+            scroll-margin-top: var(--header-height); /* 确保锚点定位正确 */
+        }
+        
+        .ai-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 35px;
+            margin-top: 55px;
+        }
+        
+        .ai-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 38px 32px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid var(--border-color);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ai-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--primary-light), var(--secondary-color));
+        }
+        
+        .ai-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .ai-icon {
+            font-size: 52px;
+            margin-bottom: 22px;
+            color: var(--primary-light);
+        }
+        
+        .ai-card h3 {
+            font-size: 24px;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+        
+        .ai-card p {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+        
+        /* 新闻展示优化 */
+        .news-section {
+            background-color: var(--light-color);
+            scroll-margin-top: var(--header-height); /* 确保锚点定位正确 */
+        }
+        
+        .news-card {
+            background-color: white;
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .news-card:hover {
+            transform: translateY(-12px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .news-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            padding: 35px;
+            color: white;
+            text-align: center;
+        }
+        
+        .news-header h3 {
+            font-size: 30px;
+            color: white;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+        
+        .news-source-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 22px;
+            font-size: 15px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .news-content {
+            padding: 45px;
+        }
+        
+        .news-content h4 {
+            font-size: 22px;
+            margin-bottom: 18px;
+            color: var(--primary-color);
+            letter-spacing: -0.02em;
+        }
+        
+        .news-content p {
+            color: var(--text-light);
+            margin-bottom: 22px;
+            line-height: 1.8;
+        }
+        
+        .news-highlights {
+            background-color: var(--light-color);
+            padding: 28px;
+            border-radius: var(--border-radius-sm);
+            margin: 32px 0;
+            border-left: 5px solid var(--secondary-color);
+        }
+        
+        /* CTA区域优化 */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+            color: white;
+            text-align: center;
+            padding: 110px 0;
+            position: relative;
+            overflow: hidden;
+            scroll-margin-top: var(--header-height); /* 确保锚点定位正确 */
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><path fill="white" fill-opacity="0.05" d="M0,500Q250,400,500,500Q750,600,1000,500L1000,1000L0,1000Z"/></svg>') no-repeat bottom;
+            background-size: cover;
+        }
+        
+        .cta-section h2 {
+            font-size: 42px;
+            margin-bottom: 22px;
+            color: white;
+            position: relative;
+            z-index: 1;
+            letter-spacing: -0.02em;
+        }
+        
+        .cta-section p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 45px;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+            line-height: 1.8;
+        }
+        
+        .cta-btns {
+            display: flex;
+            justify-content: center;
+            gap: 22px;
+            margin-top: 45px;
+            position: relative;
+            z-index: 1;
+            flex-wrap: wrap;
+        }
+        
+        .cta-btn-light {
+            background-color: white;
+            color: var(--primary-color);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .cta-btn-light:hover {
+            background-color: rgba(255, 255, 255, 0.95);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* 页脚优化 */
+        footer {
+            background-color: var(--dark-color);
+            color: #d1d5db;
+            padding: 90px 0 35px;
+            scroll-margin-top: var(--header-height); /* 确保锚点定位正确 */
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 55px;
+            margin-bottom: 60px;
+        }
+        
+        .footer-column h3 {
+            font-size: 22px;
+            margin-bottom: 28px;
+            color: white;
+            position: relative;
+            padding-bottom: 14px;
+            letter-spacing: -0.02em;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 45px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary-light), var(--secondary-color));
+            border-radius: 2px;
+        }
+        
+        .footer-column p, .footer-column a {
+            color: #9ca3af;
+            margin-bottom: 16px;
+            display: block;
+            text-decoration: none;
+            transition: color 0.3s;
+            line-height: 1.6;
+        }
+        
+        .footer-column a:hover {
+            color: var(--primary-lighter);
+            padding-left: 5px;
+        }
+        
+        .contact-info p {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .contact-info i {
+            width: 22px;
+            color: var(--primary-lighter);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 14px;
+            margin-top: 22px;
+        }
+        
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background-color: #374151;
+            border-radius: var(--border-radius-sm);
+            color: white;
+            font-size: 18px;
+            transition: var(--transition);
+        }
+        
+        .social-icons a:hover {
+            background: linear-gradient(135deg, var(--primary-light), var(--accent-color));
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 35px;
+            border-top: 1px solid #374151;
+            color: #6b7280;
+            font-size: 14.5px;
+        }
+        
+        /* 响应式设计优化 */
+        @media (max-width: 1100px) {
+            .process-steps {
+                flex-direction: column;
+                gap: 45px;
+            }
+            
+            .process-step {
+                width: 100%;
+                flex-direction: row;
+                align-items: flex-start;
+                text-align: left;
+            }
+            
+            .step-number {
+                margin-right: 22px;
+                margin-bottom: 0;
+                flex-shrink: 0;
+            }
+            
+            .process-line {
+                display: none;
+            }
+            
+            .step-content {
+                margin-top: 0;
+            }
+            
+            .problems-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+        
+        @media (max-width: 992px) {
+            :root {
+                --header-height: 75px; /* 移动端调整头部高度 */
+            }
+            
+            .section {
+                padding: 85px 0;
+            }
+            
+            .hero {
+                padding-top: 160px;
+                padding-bottom: 90px;
+            }
+            
+            .hero h1 {
+                font-size: 44px;
+            }
+            
+            .stats-section {
+                margin-top: -30px;
+                padding: 50px 0;
+                width: 94%;
+            }
+            
+            .problems-section {
+                padding-top: 130px;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .mobile-menu {
+                position: fixed;
+                top: var(--header-height);
+                left: 0;
+                width: 100%;
+                background-color: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(10px);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+                padding: 24px;
+                transform: translateY(-100%);
+                opacity: 0;
+                transition: var(--transition);
+                z-index: 999;
+                border-top: 1px solid var(--border-color);
+            }
+            
+            .mobile-menu.active {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            
+            .mobile-menu ul {
+                flex-direction: column;
+                gap: 18px;
+            }
+            
+            .mobile-menu ul li a {
+                display: block;
+                padding: 12px 0;
+                border-bottom: 1px solid var(--border-color);
+                font-size: 17px;
+            }
+            
+            .cta-btns, .hero-btns {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 320px;
+                padding: 17px 32px;
+            }
+            
+            .teachers-grid, .ai-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 38px;
+            }
+            
+            .hero p {
+                font-size: 18.5px;
+            }
+            
+            .section-title h2 {
+                font-size: 34px;
+            }
+            
+            .section-title p {
+                font-size: 17px;
+            }
+            
+            .solution-banner h2, .cta-section h2 {
+                font-size: 34px;
+            }
+            
+            .solution-banner p, .cta-section p {
+                font-size: 18.5px;
+            }
+            
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .teachers-grid, .problems-grid, .ai-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .news-content {
+                padding: 32px;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 40px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            :root {
+                --header-height: 70px; /* 更小屏幕调整头部高度 */
+            }
+            
+            .section {
+                padding: 70px 0;
+            }
+            
+            .hero {
+                padding-top: 150px;
+                padding-bottom: 80px;
+            }
+            
+            .hero h1 {
+                font-size: 32px;
+            }
+            
+            .hero p {
+                font-size: 17px;
+            }
+            
+            .section-title h2 {
+                font-size: 30px;
+            }
+            
+            .solution-banner h2, .cta-section h2 {
+                font-size: 30px;
+            }
+            
+            .stats-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+            
+            .container {
+                padding: 0 20px;
+            }
+            
+            .news-content {
+                padding: 28px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 28px;
+            }
+            
+            .section-title h2 {
+                font-size: 26px;
+            }
+            
+            .section-title p {
+                font-size: 16px;
+            }
+            
+            .stat-number {
+                font-size: 38px;
+            }
+            
+            .btn {
+                padding: 16px 24px;
+                font-size: 15.5px;
+            }
+        }
+        
+        /* 动画效果优化 */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(45px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-up {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 6px 20px rgba(59, 130, 246, 0.25); }
+            50% { transform: scale(1.03); box-shadow: 0 8px 25px rgba(59, 130, 246, 0.35); }
+            100% { transform: scale(1); box-shadow: 0 6px 20px rgba(59, 130, 246, 0.25); }
+        }
+        
+        .pulse {
+            animation: pulse 2.5s infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+        
+        .float {
+            animation: float 3.5s ease-in-out infinite;
+        }
+        
+        /* 滚动条样式 */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--light-color);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, var(--primary-light), var(--primary-color));
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(to bottom, var(--primary-color), var(--accent-color));
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部导航 -->
+    <header id="header">
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                青矜<span>建课</span>
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav>
+                <ul>
+                    <li><a href="#home" class="active">首页</a></li>
+                    <li><a href="#problems">建课难题</a></li>
+                    <li><a href="#teachers">名师团队</a></li>
+                    <li><a href="#process">建课流程</a></li>
+                    <li><a href="#ai">AI能力</a></li>
+                    <li><a href="#news">实力证明</a></li>
+                    <li><a href="#contact">联系我们</a></li>
+                </ul>
+            </nav>
+            
+            <!-- 移动端菜单 -->
+            <div class="mobile-menu" id="mobileMenu">
+                <ul>
+                    
+
+
+
+
+
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section class="hero section" id="home">
+        <div class="container">
+            <div class="hero-content fade-in-up">
+                <h1><span class="highlight">AI智慧建设课程</span>专业服务</h1>
+                <p>资源琐碎、任务重、建课难，怎么办？我们提供全链路技术服务，专项定制解决方案！<br>AI助力高质量建课，专业团队做专业的事！</p>
+                <div class="hero-btns">
+                    <a href="#process" class="btn btn-primary pulse">
+                        <i class="fas fa-play-circle"></i> 了解建课流程
+                    </a>
+                    <a href="#contact" class="btn btn-secondary">
+                        <i class="fas fa-calendar-alt"></i> 免费咨询
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- 问题展示区域 -->
+    <section class="problems-section section" id="problems">
+        <div class="container">
+            <div class="section-title fade-in-up">
+                <h2>在线课程建设常见难题</h2>
+                <p>我们深知课程建设过程中的痛点，并提供专业的解决方案</p>
+                <div class="title-decoration">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            
+            <div class="problems-grid">
+                <div class="problem-card fade-in-up">
+                    <div class="problem-icon float">
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <h3>资源琐碎分散</h3>
+                    <p>课程材料分散各处，缺乏统一管理和整合，导致建设效率低下，质量难以保证。</p>
+                </div>
+                
+                <div class="problem-card fade-in-up">
+                    <div class="problem-icon float">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h3>建设任务繁重</h3>
+                    <p>从课程设计、资源制作到技术实现，工作量巨大，需要专业团队协作完成。</p>
+                </div>
+                
+                <div class="problem-card fade-in-up">
+                    <div class="problem-icon float">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>教学质量参差</h3>
+                    <p>缺乏专业指导，课程设计不合理，影响教学效果和学员学习体验。</p>
+                </div>
+                
+                <div class="problem-card fade-in-up">
+                    <div class="problem-icon float">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>技术门槛高</h3>
+                    <p>在线课程需要技术支持，普通教师难以独立完成高质量课程建设。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 名师介绍区域 -->
+    <section class="teachers-section section" id="teachers">
+        <div class="container">
+            <div class="section-title fade-in-up">
+                <h2>名师专家团队</h2>
+                <p>汇聚行业顶尖专家，为课程建设提供专业指导</p>
+                <div class="title-decoration">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            
+            <div class="teachers-grid">
+                <!-- 名师1 -->
+                <div class="teacher-card fade-in-up">
+                    <div class="teacher-img-container">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="张明教授" class="teacher-img">
+                        <div class="teacher-tag">首席专家</div>
+                    </div>
+                    <div class="teacher-info">
+                        <a href="#" target="_blank" >
+                             <h3 class="teacher-name">张明 教授</h3>
+                        </a>
+                        <p class="teacher-title">教育技术学博士 | 课程设计专家</p>
+                        <div class="teacher-expertise">
+                            <span class="expertise-tag">在线课程设计</span>
+                            <span class="expertise-tag">教学评估</span>
+                            <span class="expertise-tag">AI教育应用</span>
+                        </div>
+                        <p class="teacher-desc">拥有15年在线教育经验，主持国家级精品在线课程5门，出版专著3部，获国家级教学成果奖2项。</p>
+                    </div>
+                </div>
+                
+                <!-- 名师2 -->
+                <div class="teacher-card fade-in-up">
+                    <div class="teacher-img-container">
+                        <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="李华博士" class="teacher-img">
+                        <div class="teacher-tag">AI专家</div>
+                    </div>
+                    <div class="teacher-info">
+                        <a href="#" target="_blank" >
+                            <h3 class="teacher-name">李华 博士</h3>
+                        </a>                       
+                        <p class="teacher-title">人工智能专家 | 教育技术总监</p>
+                        <div class="teacher-expertise">
+                            <span class="expertise-tag">AI教育</span>
+                            <span class="expertise-tag">智能学习</span>
+                            <span class="expertise-tag">数据挖掘</span>
+                        </div>
+                        <p class="teacher-desc">清华大学人工智能博士，专注于教育AI应用研究，主导开发多项智能教学系统，获专利10余项。</p>
+                    </div>
+                </div>
+                
+                <!-- 名师3 -->
+                <div class="teacher-card fade-in-up">
+                    <div class="teacher-img-container">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="王芳教授" class="teacher-img">
+                        <div class="teacher-tag">教学专家</div>
+                    </div>
+                    <div class="teacher-info">
+                        <a href="#" target="_blank" >
+                            <h3 class="teacher-name">王芳 教授</h3>
+                        </a>                        
+                        <p class="teacher-title">教育心理学博士 | 教学设计师</p>
+                        <div class="teacher-expertise">
+                            <span class="expertise-tag">学习心理学</span>
+                            <span class="expertise-tag">课程评估</span>
+                            <span class="expertise-tag">教学设计</span>
+                        </div>
+                        <p class="teacher-desc">北师大教育心理学博士，专注学习心理与教学设计，参与建设国家级精品课程20余门。</p>
+                    </div>
+                </div>
+                
+                <!-- 名师4 -->
+                <div class="teacher-card fade-in-up">
+                    <div class="teacher-img-container">
+                        <img src="https://images.unsplash.com/photo-1551836026-d5c2c5af78e4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="刘强教授" class="teacher-img">
+                        <div class="teacher-tag">技术专家</div>
+                    </div>
+                    <div class="teacher-info">
+                        <a href="#" target="_blank" >
+                            <h3 class="teacher-name">刘强 教授</h3>
+                        </a>                        
+                        <p class="teacher-title">计算机科学博士 | 技术总监</p>
+                        <div class="teacher-expertise">
+                            <span class="expertise-tag">教育技术</span>
+                            <span class="expertise-tag">系统架构</span>
+                            <span class="expertise-tag">产品开发</span>
+                        </div>
+                        <p class="teacher-desc">北京大学计算机博士，15年教育技术产品开发经验，主导多个国家级教育信息化项目建设。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 解决方案标语 -->
+    <section class="solution-banner section">
+        <div class="container fade-in-up">
+            <h2>全链路技术服务，专项定制解决方案</h2>
+            <p>AI助力高质量建课，专业团队做专业的事！</p>
+            <a href="#contact" class="btn btn-primary">
+                <i class="fas fa-comments"></i> 获取定制方案
+            </a>
+        </div>
+    </section>
+
+    <!-- 建设流程图 -->
+    <section class="process-section section" id="process">
+        <div class="container">
+            <div class="section-title fade-in-up">
+                <h2>AI智慧课程建设流程</h2>
+                <p>六大步骤，专业团队全程陪伴，确保课程质量</p>
+                <div class="title-decoration">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            
+            <div class="process-container">
+                <div class="process-line"></div>
+                
+                <div class="process-steps">
+                    <!-- 步骤1 -->
+                    <div class="process-step fade-in-up">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>课程建设方案一对一定制</h3>
+                            <p>深入分析需求，提供个性化课程建设方案，量身打造专属课程体系。</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 步骤2 -->
+                    <div class="process-step fade-in-up">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>课程共建共创</h3>
+                            <p>专家团队与教师深度合作，共同设计课程内容，确保专业性与实用性。</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 步骤3 -->
+                    <div class="process-step fade-in-up">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>教学资源设计</h3>
+                            <p>运用AI技术智能生成教学资源，包括课件、视频、互动练习等多样化材料。</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 步骤4 -->
+                    <div class="process-step fade-in-up">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>课程内容打磨</h3>
+                            <p>多轮审核与优化，确保课程内容准确、生动，符合在线学习特点。</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 步骤5 -->
+                    <div class="process-step fade-in-up">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h3>项目交付</h3>
+                            <p>完整课程包交付，包括课程设计文档、教学资源、技术实现方案等。</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 步骤6 -->
+                    <div class="process-step fade-in-up">
+                        <div class="step-number">6</div>
+                        <div class="step-content">
+                            <h3>项目迭代跟踪服务</h3>
+                            <p>提供长期技术支持与课程优化服务，根据反馈持续改进课程质量。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI能力展示 -->
+    <section class="ai-capabilities section" id="ai">
+        <div class="container">
+            <div class="section-title fade-in-up">
+                <h2>AI赋能课程建设</h2>
+                <p>利用先进AI技术，大幅提升课程建设效率与质量</p>
+                <div class="title-decoration">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            
+            <div class="ai-grid">
+                <div class="ai-card fade-in-up">
+                    <div class="ai-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>智能课程规划</h3>
+                    <p>基于学习目标AI自动生成课程大纲，科学规划学习路径。</p>
+                </div>
+                
+                <div class="ai-card fade-in-up">
+                    <div class="ai-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3>智能视频生成</h3>
+                    <p>AI辅助制作教学视频，自动生成字幕、动画和交互元素。</p>
+                </div>
+                
+                <div class="ai-card fade-in-up">
+                    <div class="ai-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h3>智能题库建设</h3>
+                    <p>AI自动生成多样化练习题和测试题，支持自适应学习。</p>
+                </div>
+                
+                <div class="ai-card fade-in-up">
+                    <div class="ai-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h3>学习数据分析</h3>
+                    <p>AI分析学习行为数据，为课程优化提供科学依据。</p>
+                </div>
+                
+                <div class="ai-card fade-in-up">
+                    <div class="ai-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <h3>多语言支持</h3>
+                    <p>AI自动翻译课程内容，支持多语言版本快速生成。</p>
+                </div>
+                
+                <div class="ai-card fade-in-up">
+                    <div class="ai-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>自适应布局</h3>
+                    <p>AI智能调整课程布局，适配不同设备和屏幕尺寸。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 新闻展示 -->
+    <section class="news-section section" id="news">
+        <div class="container">
+            <div class="section-title fade-in-up">
+                <h2>实力证明与行业认可</h2>
+                <p>我们的专业服务获得权威媒体报道和客户认可</p>
+                <div class="title-decoration">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            
+            <div class="news-card fade-in-up">
+                <div class="news-header">
+                    <h3>中央广播电视总台专题报道</h3>
+                    <div class="news-source-badge">
+                        <i class="fas fa-broadcast-tower"></i>
+                        <span>权威媒体认可</span>
+                    </div>
+                </div>
+                
+                <div class="news-content">
+                    <h4>AI技术助力在线教育课程建设</h4>
+                    <p>中央广播电视总台近日对青矜建课在AI智慧课程建设领域的最新成果进行了专题报道。报道指出，随着在线教育快速发展，课程建设面临资源整合困难、质量参差不齐等问题。青矜建课通过AI技术赋能，实现了课程建设的智能化、标准化，大幅提升了建设效率和质量。</p>
+                    
+                    <div class="news-highlights">
+                        <p><strong>报道亮点：</strong>青矜建课的AI课程建设平台能够智能分析教学内容，自动生成教学资源，并支持个性化课程定制。目前，该平台已服务于全国上百所高校和教育机构，累计建设高质量在线课程超过500门，获得了教育界的一致好评。</p>
+                    </div>
+                    
+                    <p>青矜建课创始人表示："我们致力于通过技术创新解决教育行业痛点，让每一位教师都能轻松建设高质量在线课程。未来，我们将继续深化AI在教育领域的应用，推动教育公平和高质量发展。"</p>
+                    
+                    <div style="margin-top: 35px;">
+                        <a href="https://apicnrapp.cnr.cn/html/share.html?id=30463270&ui=Lq3o9mMo4cb/qZRYIqbeg/dFpgCWMx/CcXhTrC1MeyrGXUKbku25cheucBVaXGkV&action=share&type=1" 
+                           target="_blank" class="btn btn-primary">
+                            <i class="fas fa-external-link-alt"></i> 查看完整报道
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA区域 -->
+    <section class="cta-section section">
+        <div class="container fade-in-up">
+            <h2>开启AI智慧课程建设之旅</h2>
+            <p>无论您是高校教师、企业培训师还是教育机构负责人，我们都能为您提供专业的课程建设解决方案。</p>
+            <div class="cta-btns">
+                <a href="#contact" class="btn btn-primary">
+                    <i class="fas fa-phone-alt"></i> 预约免费咨询
+                </a>
+                <a href="tel:400-888-9999" class="btn cta-btn-light">
+                    <i class="fas fa-mobile-alt"></i> 400-888-9999
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>青矜建课</h3>
+                    <p>专业AI智慧课程建设服务商，致力于通过技术创新提升在线教育质量，让课程建设更简单、更高效。</p>
+                    <div class="social-icons">
+                        <a href="https://wx.qq.com/"><i class="fab fa-weixin"></i></a>
+                        <a href="https://weibo.com/login.php"><i class="fab fa-weibo"></i></a>
+                        <a href="https://www.zhihu.com/"><i class="fab fa-zhihu"></i></a>
+                        <a href="https://www.instagram.com/"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>核心服务</h3>
+                    <a href="#process">课程建设方案定制</a>
+                    <a href="#process">课程共建共创</a>
+                    <a href="#process">教学资源设计</a>
+                    <a href="#process">课程内容打磨</a>
+                    <a href="#process">项目交付与迭代</a>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>AI技术</h3>
+                    <a href="#ai">智能课程规划</a>
+                    <a href="#ai">智能视频生成</a>
+                    <a href="#ai">智能题库建设</a>
+                    <a href="#ai">学习数据分析</a>
+                    <a href="#ai">多语言支持</a>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>联系我们</h3>
+                    <div class="contact-info">
+                        <p><i class="fas fa-map-marker-alt"></i> 北京市海淀区中关村科技园创新大厦</p>
+                        <p><i class="fas fa-envelope"></i> contact@qingjincourse.com</p>
+                        <p><i class="fas fa-phone"></i> 400-888-9999</p>
+                        <p><i class="fas fa-clock"></i> 周一至周五 9:00-18:00</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 青矜建课 AI智慧课程建设平台. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 移动端菜单控制
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const navLinks = document.querySelectorAll('nav a, .mobile-menu a');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                mobileMenu.classList.toggle('active');
+                this.innerHTML = mobileMenu.classList.contains('active') 
+                    ? '<i class="fas fa-times"></i>' 
+                    : '<i class="fas fa-bars"></i>';
+            });
+            
+            // 点击菜单链接关闭移动菜单
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    mobileMenu.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                });
+            });
+            
+            // 平滑滚动 - 修复遮挡问题
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    if(this.getAttribute('href') === '#') return;
+                    
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if(targetElement) {
+                        // 使用现代浏览器支持的scrollIntoView方法，考虑头部高度
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+            // 导航栏滚动效果
+            window.addEventListener('scroll', function() {
+                const header = document.getElementById('header');
+                if (window.scrollY > 120) {
+                    header.style.boxShadow = '0 8px 30px rgba(0, 0, 0, 0.12)';
+                    header.style.padding = '12px 0';
+                } else {
+                    header.style.boxShadow = 'var(--shadow-sm)';
+                    header.style.padding = '18px 0';
+                }
+                
+                // 更新活动导航项
+                const sections = document.querySelectorAll('section, footer');
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 120;
+                    const sectionHeight = section.clientHeight;
+                    if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+            
+            // 统计数字动画
+            const statNumbers = document.querySelectorAll('.stat-number');
+            statNumbers.forEach(stat => {
+                const originalText = stat.textContent;
+                const target = parseInt(stat.getAttribute('data-count'));
+                let current = 0;
+                const increment = target / 60; // 更平滑的动画
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        stat.textContent = target + (originalText.includes('+') ? '+' : originalText.includes('%') ? '%' : '');
+                        clearInterval(timer);
+                    } else {
+                        stat.textContent = Math.floor(current) + (originalText.includes('+') ? '+' : originalText.includes('%') ? '%' : '');
+                    }
+                }, 25);
+            });
+            
+            // 滚动动画
+            const observerOptions = {
+                threshold: 0.08,
+                rootMargin: '0px 0px -60px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in-up');
+                    }
+                });
+            }, observerOptions);
+            
+            // 观察需要动画的元素
+            document.querySelectorAll('.fade-in-up').forEach(el => {
+                observer.observe(el);
+            });
+            
+            // 控制台信息
+            console.log('青矜建课 - AI智慧课程建设平台已加载');
+            console.log('中央广播电视总台报道：https://apicnrapp.cnr.cn/html/share.html?id=30463270');
+        });
+    </script>
+</body>
+</html>
